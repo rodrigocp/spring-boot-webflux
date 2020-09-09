@@ -15,6 +15,7 @@ dependencies {
 	implementation("org.springframework.cloud:spring-cloud-starter-openfeign")
 	implementation("org.springframework.cloud:spring-cloud-starter-netflix-zuul")
 	implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
+	implementation("org.springframework.security.auth.boot:spring-security-oauth2-autoconfigure")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 

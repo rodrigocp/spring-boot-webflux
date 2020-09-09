@@ -1,6 +1,6 @@
 package br.com.rcp.gateway
 
-import br.com.rcp.gateway.clients.AccountClient
+import br.com.rcp.gateway.apis.AccountClient
 import org.springframework.web.filter.OncePerRequestFilter
 import javax.servlet.FilterChain
 import javax.servlet.http.HttpServletRequest

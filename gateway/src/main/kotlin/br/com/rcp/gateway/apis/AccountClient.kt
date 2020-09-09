@@ -1,4 +1,4 @@
-package br.com.rcp.gateway.clients
+package br.com.rcp.gateway.apis
 
 import br.com.rcp.gateway.dto.AccountDTO
 import org.springframework.cloud.openfeign.FeignClient
