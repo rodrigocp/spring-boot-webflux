@@ -31,9 +31,10 @@ class Authentication {
 				GET("/users/",				handler::fetch)
 				GET("/users/{identifier}",	handler::find)
 				GET("/users/{username}",	handler::findByUsername)
+				POST("/users/",				handler::persist)
+				POST("/users/validate/",	handler::validate)
+				PATCH("/users/{identifier}",handler::update)
 			}
-			POST("/users/",					handler::persist)
-			PATCH("/users/{identifier}",	handler::update)
 		}
 	}
 

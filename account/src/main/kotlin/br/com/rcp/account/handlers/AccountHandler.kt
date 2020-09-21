@@ -2,6 +2,7 @@ package br.com.rcp.account.handlers
 
 import br.com.rcp.account.domains.Account
 import br.com.rcp.account.dto.AccountDTO
+import br.com.rcp.account.dto.ValidationDTO
 import br.com.rcp.account.mapper.AccountMapper
 import br.com.rcp.account.repositories.AccountRepository
 import br.com.rcp.commons.handler.AbstractHandler
@@ -42,5 +43,19 @@ class AccountHandler(@Autowired repository: AccountRepository, @Autowired privat
 
 	override suspend fun update(request: ServerRequest): ServerResponse {
 		TODO("Not yet implemented")
+	}
+
+	suspend fun validate(request: ServerRequest): ServerResponse {
+		val	data		= request.awaitBody<ValidationDTO>()
+		val	query		= Query(Criteria.where("username").isEqualTo(data.username))
+		val	document	= repository.find(query).stream().findFirst().orElse(null)
+		val	matches		= document?.let { encoder.matches(data.password, it.password) } ?: false
+		val response	= mapper.toDTO(document)
+
+		return if (response != null && matches) {
+			ServerResponse.ok().contentType(APPLICATION_JSON).bodyValueAndAwait(response)
+		} else {
+			ServerResponse.notFound().buildAndAwait()
+		}
 	}
 }

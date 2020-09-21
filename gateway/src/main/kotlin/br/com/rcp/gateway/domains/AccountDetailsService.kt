@@ -1,6 +1,6 @@
 package br.com.rcp.gateway.domains
 
-import br.com.rcp.gateway.apis.AccountClient
+import br.com.rcp.gateway.apis.AccountService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.authority.SimpleGrantedAuthority
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service
 import java.util.stream.Collectors
 
 @Service
-class AccountDetailsService(@Autowired private var client: AccountClient): UserDetailsService {
+class AccountDetailsService(@Autowired private var client: AccountService): UserDetailsService {
 	override fun loadUserByUsername(username: String?): UserDetails {
 		val	login	= username 				?: throw UsernameNotFoundException("Empty username!")
 		val	account	= client.find(login) 	?: throw UsernameNotFoundException("Account not found!")
