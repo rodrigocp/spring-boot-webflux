@@ -18,6 +18,9 @@ class AccountDTO: AbstractDTO() {
 	@Length(min = 8)
 	var 	password	: String?				= null
 
-	@JsonProperty("password")
+	@JsonProperty("enabled")
+	var		enabled		: Boolean				= false
+
+	@JsonProperty("roles")
 	var 	roles		: MutableList<String>?	= null
 }

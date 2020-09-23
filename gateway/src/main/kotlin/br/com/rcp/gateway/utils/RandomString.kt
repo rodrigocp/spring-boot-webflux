@@ -14,7 +14,7 @@ object RandomString {
 			val	symbols								= dictionary.toCharArray()
 			val	buffer								= CharArray(length)
 			for (i in buffer.indices) buffer[i]	= symbols[random.nextInt(symbols.size)]
-			return buffer.toString()
+			return buffer.joinToString("")
 		} else {
 			throw RuntimeException("Length or symbols does not fit requirement!")
 		}

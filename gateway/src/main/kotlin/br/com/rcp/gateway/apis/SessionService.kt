@@ -2,10 +2,12 @@ package br.com.rcp.gateway.apis
 
 import br.com.rcp.gateway.dto.SessionDTO
 import org.springframework.cloud.openfeign.FeignClient
+import org.springframework.stereotype.Service
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.servlet.function.ServerResponse
 
 @FeignClient("session-service", url = "http://localhost:8060")
+@Service
 interface SessionService {
 	@GetMapping(path = ["/sessions/{token}"])
 	fun find(@PathVariable("token") token: String) : SessionDTO

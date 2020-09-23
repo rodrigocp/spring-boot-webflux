@@ -1,10 +1,12 @@
 package br.com.rcp.account.domains
 
 import br.com.rcp.commons.domain.Domain
+import org.springframework.data.annotation.TypeAlias
 import org.springframework.data.mongodb.core.index.Indexed
 import org.springframework.data.mongodb.core.mapping.Document
 
-@Document
+@Document("accounts")
+@TypeAlias("account")
 open class Account : Domain() {
 	@Indexed(unique = true)
 	var		username	: String				= ""

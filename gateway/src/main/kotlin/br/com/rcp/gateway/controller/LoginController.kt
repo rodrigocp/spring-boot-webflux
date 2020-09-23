@@ -1,28 +1,25 @@
 package br.com.rcp.gateway.controller
 
-import br.com.rcp.gateway.apis.AccountService
-import br.com.rcp.gateway.apis.SessionService
+import br.com.rcp.gateway.apis.AccountServiceAPI
 import br.com.rcp.gateway.dto.LoginDTO
 import br.com.rcp.gateway.dto.SessionDTO
 import br.com.rcp.gateway.utils.RandomString
+import br.com.rcp.gateway.utils.Utilities.writeJSON
 import com.fasterxml.jackson.databind.ObjectMapper
+import kotlinx.coroutines.reactive.awaitSingle
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.stereotype.Controller
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.*
 
-@Controller
+@RestController
 @RequestMapping("/login")
-class LoginController(@Autowired private val service: AccountService, @Autowired private val session: SessionService) {
+class LoginController(@Autowired private val service: AccountServiceAPI) {
 	@PostMapping("/")
-	fun login(login: LoginDTO) {
-		val	account	= service.validate(login)
+	suspend fun login(@RequestBody login: LoginDTO) : ResponseEntity<SessionDTO> {
+		val	account	= service.validate(login).awaitSingle()
 		val	mapper	= ObjectMapper()
 		val	random	= RandomString.generate()
-		val	token	= SessionDTO(random, mapper.writeValueAsString(account), 600)
-
-		if (session.create(token).statusCode().is2xxSuccessful) {
-			TODO("Implement")
-		}
+		val	token	= SessionDTO(random, mapper.writeJSON(account), 600)
+		return ResponseEntity.ok(token)
 	}
 }

@@ -1,19 +1,15 @@
 package br.com.rcp.gateway.security
 
-import br.com.rcp.gateway.apis.AccountService
+import br.com.rcp.gateway.apis.AccountServiceAPI
 import br.com.rcp.gateway.apis.SessionService
-import com.fasterxml.jackson.databind.ObjectMapper
-import org.springframework.http.HttpHeaders.AUTHORIZATION
-import org.springframework.web.filter.OncePerRequestFilter
-import java.util.*
-import javax.servlet.FilterChain
-import javax.servlet.http.HttpServletRequest
-import javax.servlet.http.HttpServletResponse
+import org.springframework.web.server.*
+import reactor.core.publisher.Mono
 
-class RequestFilter(private val service: AccountService, private val session: SessionService) : OncePerRequestFilter() {
-	override fun doFilterInternal(request: HttpServletRequest, response: HttpServletResponse, chain: FilterChain) {
-		val	token	= Optional.ofNullable(request.getHeader(AUTHORIZATION))
-		val	mapper	= ObjectMapper()
-		chain.doFilter(request, response)
+class RequestFilter(private val service: AccountServiceAPI, private val session: SessionService) : WebFilter {
+	override fun filter(exchange: ServerWebExchange, chain: WebFilterChain): Mono<Void> {
+		TODO("Implement method")
+//		val	token	= Optional.ofNullable(request.getHeader(AUTHORIZATION))
+//		val	mapper	= ObjectMapper()
+//		chain.doFilter(request, response)
 	}
 }

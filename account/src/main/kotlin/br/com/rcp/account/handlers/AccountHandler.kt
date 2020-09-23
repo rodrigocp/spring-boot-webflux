@@ -53,7 +53,7 @@ class AccountHandler(@Autowired repository: AccountRepository, @Autowired privat
 		val response	= mapper.toDTO(document)
 
 		return if (response != null && matches) {
-			ServerResponse.ok().contentType(APPLICATION_JSON).bodyValueAndAwait(response)
+			ServerResponse.ok().bodyValueAndAwait(response)
 		} else {
 			ServerResponse.notFound().buildAndAwait()
 		}
