@@ -6,7 +6,6 @@ import br.com.rcp.account.dto.ValidationDTO
 import br.com.rcp.account.mapper.AccountMapper
 import br.com.rcp.account.repositories.AccountRepository
 import br.com.rcp.commons.handler.AbstractHandler
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.mongodb.core.query.*
 import org.springframework.http.MediaType.APPLICATION_JSON
 import org.springframework.security.crypto.password.PasswordEncoder
@@ -14,7 +13,7 @@ import org.springframework.stereotype.Service
 import org.springframework.web.reactive.function.server.*
 
 @Service
-class AccountHandler(@Autowired repository: AccountRepository, @Autowired private val encoder: PasswordEncoder): AbstractHandler<Account, AccountDTO>(repository, AccountMapper()) {
+class AccountHandler(repository: AccountRepository, private val encoder: PasswordEncoder): AbstractHandler<Account, AccountDTO>(repository, AccountMapper()) {
 	suspend fun findByUsername(request: ServerRequest): ServerResponse {
 		val	username	= request.pathVariable("username")
 		val	query		= Query(Criteria.where("username").isEqualTo(username))

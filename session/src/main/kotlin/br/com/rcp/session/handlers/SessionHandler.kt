@@ -3,22 +3,20 @@ package br.com.rcp.session.handlers
 import br.com.rcp.session.dto.SessionDTO
 import br.com.rcp.session.mappers.SessionMapper
 import br.com.rcp.session.repositories.SessionRepository
-import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.http.MediaType
 import org.springframework.stereotype.Service
 import org.springframework.web.reactive.function.server.*
-import java.net.URI
+import java.time.LocalDateTime
 
 @Service
-class SessionHandler(@Autowired private val repository: SessionRepository) {
+class SessionHandler(private val repository: SessionRepository) {
 	private	val	mapper	: SessionMapper	get()	= SessionMapper()
 
 	suspend fun persist(request: ServerRequest): ServerResponse {
-		val	data		= request.awaitBodyOrNull<SessionDTO>()
+		val	data		= request.awaitBodyOrNull<SessionDTO>()?.apply { issued = LocalDateTime.now() }
 		val	document	= data?.let { repository.create(it.token, it.data, it.expires) } ?: false
 
-		return if (document) {
-			ServerResponse.created(URI.create("")).buildAndAwait()
+		return if (document && data != null) {
+			ServerResponse.ok().bodyValueAndAwait(data)
 		} else {
 			ServerResponse.badRequest().buildAndAwait()
 		}
@@ -30,7 +28,7 @@ class SessionHandler(@Autowired private val repository: SessionRepository) {
 		val	response	= document?.let { mapper.toDTO(it) }
 
 		return if (response != null) {
-			ServerResponse.ok().contentType(MediaType.APPLICATION_JSON).bodyValueAndAwait(response)
+			ServerResponse.ok().bodyValueAndAwait(response)
 		} else {
 			ServerResponse.notFound().buildAndAwait()
 		}

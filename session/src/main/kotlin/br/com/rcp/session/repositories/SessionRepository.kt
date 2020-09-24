@@ -7,13 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.redis.core.ReactiveRedisTemplate
 import org.springframework.data.redis.core.ReactiveValueOperations
 import org.springframework.stereotype.Repository
+import java.time.LocalDateTime
 
 @Repository
 class SessionRepository(@Autowired private val template: ReactiveRedisTemplate<String, Session>) {
 	private	val	operations : ReactiveValueOperations<String, Session> by lazy { template.opsForValue() }
 
-	suspend fun create(key: String, value: String, ttl: Long) : Boolean {
-		return operations.set(key, Session(key, value, ttl)).awaitFirstOrElse { false }
+	suspend fun create(key: String, value: Map<String, Any>, ttl: Long) : Boolean {
+		return operations.set(key, Session(key, ttl, LocalDateTime.now(), value)).awaitFirstOrElse { false }
 	}
 
 	suspend fun find(key: String) : Session? {

@@ -20,10 +20,8 @@ class Security {
 			.formLogin().disable()
 			.logout().disable()
 			.authorizeExchange()
-			.pathMatchers("/users/public").permitAll()
-			.pathMatchers("/users/create/").permitAll()
-			.pathMatchers("/login/**").permitAll()
-			.anyExchange().authenticated()
+			.pathMatchers("/api/**").permitAll()
+			.anyExchange().permitAll()
 			.and()
 			.build()
 	}

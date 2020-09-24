@@ -2,26 +2,33 @@ package br.com.rcp.session
 
 import br.com.rcp.session.domain.Session
 import br.com.rcp.session.handlers.SessionHandler
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
+import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient
+import org.springframework.cloud.netflix.hystrix.EnableHystrix
 import org.springframework.context.annotation.Bean
 import org.springframework.data.redis.connection.ReactiveRedisConnectionFactory
 import org.springframework.data.redis.core.ReactiveRedisTemplate
 import org.springframework.data.redis.repository.configuration.EnableRedisRepositories
 import org.springframework.data.redis.serializer.*
 import org.springframework.http.MediaType
+import org.springframework.web.reactive.config.EnableWebFlux
 import org.springframework.web.reactive.function.server.*
 
-@SpringBootApplication
 @EnableRedisRepositories
+@EnableDiscoveryClient
+@EnableCircuitBreaker
+@SpringBootApplication
+@EnableWebFlux
+@EnableHystrix
 class SessionApplication {
 	@Bean
-	fun session(@Autowired handler: SessionHandler): RouterFunction<ServerResponse> {
+	fun session(handler: SessionHandler): RouterFunction<ServerResponse> {
 		return coRouter {
 			accept(MediaType.APPLICATION_JSON).nest {
 				GET("/sessions/{token}",	handler::find)
-				POST("/sessions/",			handler::persist)
+				POST("/sessions",			handler::persist)
 				DELETE("/sessions/{token}",	handler::remove)
 			}
 		}
