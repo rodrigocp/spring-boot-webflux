@@ -1,7 +1,6 @@
 package br.com.rcp.session.dto
 
 import com.fasterxml.jackson.annotation.*
-import java.time.LocalDateTime
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -14,7 +13,7 @@ data class SessionDTO(
 	val	expires	: Long,
 
 	@JsonProperty("issued")
-	var	issued	: LocalDateTime?,
+	var	issued	: String?,
 
 	@JsonProperty("data")
 	val	data	: Map<String, Any>
