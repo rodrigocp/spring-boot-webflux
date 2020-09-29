@@ -24,7 +24,7 @@ class SessionHandler(private val repository: SessionRepository) {
 	}
 
 	suspend fun find(request: ServerRequest): ServerResponse {
-		val	key			= request.pathVariable("token")
+		val	key			= request.queryParam("token").orElse("")
 		val	document	= repository.find(key)
 		val	response	= document?.let { mapper.toDTO(it) }
 
@@ -36,7 +36,7 @@ class SessionHandler(private val repository: SessionRepository) {
 	}
 
 	suspend fun remove(request: ServerRequest): ServerResponse {
-		val	key			= request.pathVariable("token")
+		val	key			= request.queryParam("token").orElse("")
 		val	document	= repository.remove(key)
 
 		return if (document) {

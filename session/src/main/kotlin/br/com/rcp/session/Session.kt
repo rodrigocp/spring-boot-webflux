@@ -2,6 +2,7 @@ package br.com.rcp.session
 
 import br.com.rcp.session.domain.Session
 import br.com.rcp.session.handlers.SessionHandler
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker
@@ -16,10 +17,11 @@ import org.springframework.http.MediaType
 import org.springframework.web.reactive.config.EnableWebFlux
 import org.springframework.web.reactive.function.server.*
 
+@ExperimentalCoroutinesApi
 @EnableRedisRepositories
+@SpringBootApplication
 @EnableDiscoveryClient
 @EnableCircuitBreaker
-@SpringBootApplication
 @EnableWebFlux
 @EnableHystrix
 class SessionApplication {
@@ -27,9 +29,9 @@ class SessionApplication {
 	fun session(handler: SessionHandler): RouterFunction<ServerResponse> {
 		return coRouter {
 			accept(MediaType.APPLICATION_JSON).nest {
-				GET("/sessions/{token}",	handler::find)
-				POST("/sessions",			handler::persist)
-				DELETE("/sessions/{token}",	handler::remove)
+				GET("/sessions",	handler::find)
+				POST("/sessions",	handler::persist)
+				DELETE("/sessions",	handler::remove)
 			}
 		}
 	}

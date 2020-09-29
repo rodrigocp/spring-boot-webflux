@@ -18,10 +18,10 @@ import org.springframework.web.reactive.function.server.*
 
 @ExperimentalCoroutinesApi
 @SpringBootApplication
-@EnableMongoAuditing
-@EnableWebFlux
 @EnableDiscoveryClient
 @EnableCircuitBreaker
+@EnableMongoAuditing
+@EnableWebFlux
 @EnableHystrix
 class Authentication {
 	@Bean
