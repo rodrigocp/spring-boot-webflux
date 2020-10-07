@@ -2,6 +2,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 buildscript {
 	repositories {
+		jcenter()
 		mavenCentral()
 	}
 }
@@ -28,7 +29,6 @@ allprojects {
 
 	tasks.withType<KotlinCompile> {
 		kotlinOptions {
-			freeCompilerArgs 	= listOf("-Xjsr305=strict")
 			jvmTarget			= "11"
 			incremental			= false
 		}
@@ -37,10 +37,14 @@ allprojects {
 
 subprojects {
 	repositories {
+		jcenter()
 		mavenCentral()
 	}
 
 	apply {
+		plugin("java")
+		plugin("kotlin")
+		plugin("org.springframework.boot")
 		plugin("io.spring.dependency-management")
 	}
 }

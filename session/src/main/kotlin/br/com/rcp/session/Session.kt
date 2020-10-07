@@ -17,7 +17,6 @@ import org.springframework.http.MediaType
 import org.springframework.web.reactive.config.EnableWebFlux
 import org.springframework.web.reactive.function.server.*
 
-@ExperimentalCoroutinesApi
 @EnableRedisRepositories
 @SpringBootApplication
 @EnableDiscoveryClient
@@ -46,6 +45,7 @@ class SessionApplication {
 	}
 }
 
+@ExperimentalCoroutinesApi
 fun main(args: Array<String>) {
 	runApplication<SessionApplication>(*args)
 }

@@ -16,6 +16,7 @@ dependencies {
 	implementation("org.springframework.cloud:spring-cloud-starter-gateway")
 	implementation("com.playtika.reactivefeign:feign-reactor-spring-cloud-starter:2.0.22")
 	implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
+	implementation("com.github.jengelman.gradle.plugins:shadow:4.0.2")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 

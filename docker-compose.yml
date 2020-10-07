@@ -1,0 +1,55 @@
+version: '3'
+
+services:
+    redis:
+        container_name: database-redis
+        restart: unless-stopped
+        image: redis
+        command: redis-server --requirepass "postgres"
+        ports: ['6379:6379']
+
+    mongo:
+        container_name: database-mongo
+        restart: unless-stopped
+        image: mongo
+        ports: ['27017:27017']
+        environment:
+            MONGO_INITDB_ROOT_USERNAME: postgres
+            MONGO_INITDB_ROOT_PASSWORD: postgres
+            MONGO_INITDB_DATABASE: authentication
+
+    eureka:
+        container_name: service-eureka
+        restart: unless-stopped
+        build: ./eureka
+        ports: ['8761:8761']
+
+    account:
+        container_name: service-account
+        restart: unless-stopped
+        build: ./account
+        depends_on: [mongo, eureka]
+        ports: ['8070:8070']
+        environment:
+            spring.data.mongodb.host: mongo
+            eureka.client.service-url.defaultZone: http://eureka:8761/eureka/
+
+    session:
+        container_name: service-session
+        restart: unless-stopped
+        build: ./session
+        depends_on: [redis, account]
+        ports: ['8060:8060']
+        environment:
+            spring.data.mongodb.host: mongo
+            spring.redis.host: redis
+            eureka.client.service-url.defaultZone: http://eureka:8761/eureka/
+
+    gateway:
+        container_name: service-gateway
+        restart: unless-stopped
+        build: ./gateway
+        depends_on: [session]
+        ports: ['8080:8080']
+        environment:
+            eureka.client.service-url.defaultZone: http://eureka:8761/eureka/
