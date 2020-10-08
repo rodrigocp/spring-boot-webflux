@@ -1,11 +1,11 @@
 ### Resume
 Simple Micro-Service Spring Boot project.
-It consists in:
+### Services:
 * One Redis Database
 * One Mongo Database
-* A **Gateway Service** for authentication and routing
-* A **Session Service** for authorize requests (**RedisDB**)
-* An **Account Service** for registered users (**MongoDB**)
+* **Gateway Service** for authentication and routing
+* **Session Service** for authorize requests (**RedisDB**)
+* **Account Service** for registered users (**MongoDB**)
 
 ### Build
 * Run Gradle Build:
