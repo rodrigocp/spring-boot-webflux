@@ -26,25 +26,13 @@ class Gateway {
 
 	@Bean
 	fun accountServiceAPI() : AccountServiceAPI {
-		return WebReactiveFeign.builder<AccountServiceAPI>().target(AccountServiceAPI::class.java, "http://localhost:8070")
+		return WebReactiveFeign.builder<AccountServiceAPI>().target(AccountServiceAPI::class.java, "http://account:8070")
 	}
 
 	@Bean
 	fun sessionServiceAPI() : SessionServiceAPI {
-		return WebReactiveFeign.builder<SessionServiceAPI>().target(SessionServiceAPI::class.java, "http://localhost:8060")
+		return WebReactiveFeign.builder<SessionServiceAPI>().target(SessionServiceAPI::class.java, "http://session:8060")
 	}
-
-//	@Bean
-//	fun accountServiceAPI() : AccountServiceAPI {
-//		return CloudReactiveFeign.builder<AccountServiceAPI>(WebReactiveFeign.builder<AccountServiceAPI>())
-//			.setLoadBalancerCommandFactory {
-//				LoadBalancerCommand.builder<Any>()
-//					.withLoadBalancer(AbstractLoadBalancer::class.java.cast(getNamedLoadBalancer("account-service")))
-//					.withRetryHandler(DefaultLoadBalancerRetryHandler(1, 1, true))
-//					.build()
-//			}
-//			.target(AccountServiceAPI::class.java, "http://account-service")
-//	}
 }
 
 fun main(args: Array<String>) {
