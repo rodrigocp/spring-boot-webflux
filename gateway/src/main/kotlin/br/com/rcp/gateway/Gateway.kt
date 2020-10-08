@@ -3,6 +3,8 @@ package br.com.rcp.gateway
 import br.com.rcp.gateway.apis.AccountServiceAPI
 import br.com.rcp.gateway.apis.SessionServiceAPI
 import org.springframework.boot.autoconfigure.SpringBootApplication
+import org.springframework.boot.autoconfigure.data.mongo.MongoReactiveDataAutoConfiguration
+import org.springframework.boot.autoconfigure.mongo.MongoReactiveAutoConfiguration
 import org.springframework.boot.runApplication
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient
 import org.springframework.cloud.gateway.route.RouteLocator
@@ -11,7 +13,7 @@ import org.springframework.context.annotation.Bean
 import reactivefeign.webclient.WebReactiveFeign
 
 
-@SpringBootApplication
+@SpringBootApplication(exclude = [MongoReactiveAutoConfiguration::class, MongoReactiveDataAutoConfiguration::class])
 @EnableDiscoveryClient
 class Gateway {
 	@Bean

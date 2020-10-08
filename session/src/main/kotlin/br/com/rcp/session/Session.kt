@@ -4,6 +4,8 @@ import br.com.rcp.session.domain.Session
 import br.com.rcp.session.handlers.SessionHandler
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.springframework.boot.autoconfigure.SpringBootApplication
+import org.springframework.boot.autoconfigure.data.mongo.MongoReactiveDataAutoConfiguration
+import org.springframework.boot.autoconfigure.mongo.MongoReactiveAutoConfiguration
 import org.springframework.boot.runApplication
 import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient
@@ -17,8 +19,8 @@ import org.springframework.http.MediaType
 import org.springframework.web.reactive.config.EnableWebFlux
 import org.springframework.web.reactive.function.server.*
 
+@SpringBootApplication(exclude = [MongoReactiveAutoConfiguration::class, MongoReactiveDataAutoConfiguration::class])
 @EnableRedisRepositories
-@SpringBootApplication
 @EnableDiscoveryClient
 @EnableCircuitBreaker
 @EnableWebFlux

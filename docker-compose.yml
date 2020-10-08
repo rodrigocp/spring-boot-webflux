@@ -6,6 +6,7 @@ services:
         restart: unless-stopped
         image: redis
         command: redis-server --requirepass "postgres"
+        networks: [internal]
         ports: ['6379:6379']
 
     mongo:
@@ -13,6 +14,7 @@ services:
         restart: unless-stopped
         image: mongo
         ports: ['27017:27017']
+        networks: [internal]
         environment:
             MONGO_INITDB_ROOT_USERNAME: postgres
             MONGO_INITDB_ROOT_PASSWORD: postgres
@@ -22,6 +24,7 @@ services:
         container_name: service-eureka
         restart: unless-stopped
         build: ./eureka
+        networks: [internal]
         ports: ['8761:8761']
 
     account:
@@ -30,6 +33,7 @@ services:
         build: ./account
         depends_on: [mongo, eureka]
         ports: ['8070:8070']
+        networks: [internal]
         environment:
             spring.data.mongodb.host: mongo
             eureka.client.service-url.defaultZone: http://eureka:8761/eureka/
@@ -40,8 +44,8 @@ services:
         build: ./session
         depends_on: [redis, account]
         ports: ['8060:8060']
+        networks: [internal]
         environment:
-            spring.data.mongodb.host: mongo
             spring.redis.host: redis
             eureka.client.service-url.defaultZone: http://eureka:8761/eureka/
 
@@ -51,5 +55,17 @@ services:
         build: ./gateway
         depends_on: [session]
         ports: ['8080:8080']
+        networks: [public, internal]
         environment:
             eureka.client.service-url.defaultZone: http://eureka:8761/eureka/
+
+networks:
+    public:
+        name: net-public
+        driver: bridge
+        internal: false
+
+    internal:
+        name: net-internal
+        driver: bridge
+        internal: true
