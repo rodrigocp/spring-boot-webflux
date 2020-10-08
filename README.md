@@ -4,7 +4,7 @@ Simple Micro-Service Spring Boot project.
 * One Redis Database
 * One Mongo Database
 * **Gateway Service** for authentication and routing
-* **Session Service** for authorize requests (**RedisDB**)
+* **Session Service** for authorization requests (**RedisDB**)
 * **Account Service** for registered users (**MongoDB**)
 
 ### Build
