@@ -26,5 +26,5 @@ $ curl --request GET --url 'http://localhost:8080/api/sessions?token=aTG3kzYhXNu
 ```
 * Do a GET Request for User List:
 ```
-curl --request GET --url 'http://localhost:8080/api/users/ --header 'authorization: Bearer aTG3kzYhXNuO7GimIPCQ'
+$ curl --request GET --url 'http://localhost:8080/api/users/ --header 'authorization: Bearer aTG3kzYhXNuO7GimIPCQ'
 ```
