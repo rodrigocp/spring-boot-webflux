@@ -19,18 +19,18 @@ class Migrations {
 	@ChangeSet(order = "001", author = "Rodrigo Pereira", id = "add_default_account")
 	fun addDefaultAuthorities(template: MongockTemplate) {
 		template.insert(
-			Account().apply {
-				username	= "administrator"
-				fullname	= "System Administrator"
-				email		= "administrator@system.com"
-				password	= encoder.encode("root")
-				enabled		= true
-				createdAt	= LocalDateTime.now()
-				updatedAt	= LocalDateTime.now()
-				createdBy	= "system"
-				modifiedBy	= "system"
+			Account(
+				username	= "administrator",
+				name		= "System Administrator",
+				email		= "administrator@system.com",
+				password	= encoder.encode("root"),
+				enabled		= true,
+				createdAt	= LocalDateTime.now(),
+				updatedAt	= LocalDateTime.now(),
+				createdBy	= "system",
+				modifiedBy	= "system",
 				roles		= arrayListOf()
-			}
+			)
 		)
 	}
 }

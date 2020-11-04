@@ -38,22 +38,10 @@ services:
             spring.data.mongodb.host: mongo
             eureka.client.service-url.defaultZone: http://eureka:8761/eureka/
 
-    session:
-        container_name: service-session
-        restart: unless-stopped
-        build: ./session
-        depends_on: [redis, account]
-        ports: ['8060:8060']
-        networks: [internal]
-        environment:
-            spring.redis.host: redis
-            eureka.client.service-url.defaultZone: http://eureka:8761/eureka/
-
     gateway:
         container_name: service-gateway
         restart: unless-stopped
         build: ./gateway
-        depends_on: [session]
         ports: ['8080:8080']
         networks: [public, internal]
         environment:

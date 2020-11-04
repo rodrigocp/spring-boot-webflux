@@ -7,9 +7,9 @@ plugins {
 dependencies {
 	implementation(kotlin("stdlib"))
 	implementation(kotlin("reflect"))
-	implementation(project(":commons"))
 	implementation("joda-time:joda-time:2.10.6")
 	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
+	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.springframework.boot:spring-boot-starter-webflux")
 	implementation("org.springframework.boot:spring-boot-starter-actuator")
 	implementation("org.springframework.cloud:spring-cloud-starter-config")
