@@ -22,8 +22,8 @@ class Gateway {
 
 	@Bean
 	fun webClient() : WebClient {
-//		return WebClient.create("http://service-account:8070")
-		return WebClient.create("http://localhost:8070")
+		return WebClient.create("http://service-account:8070")
+//		return WebClient.create("http://localhost:8070")
 	}
 }
 
