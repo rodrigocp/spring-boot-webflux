@@ -15,7 +15,6 @@ import org.springframework.security.web.server.context.NoOpServerSecurityContext
 import org.springframework.stereotype.Component
 import reactor.core.publisher.Mono
 
-
 @Configuration
 @EnableWebFluxSecurity
 @EnableReactiveMethodSecurity

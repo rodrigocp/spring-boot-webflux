@@ -1,6 +1,5 @@
 package br.com.rcp.gateway
 
-import br.com.rcp.gateway.apis.AccountServiceAPI
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.autoconfigure.data.mongo.MongoReactiveDataAutoConfiguration
 import org.springframework.boot.autoconfigure.mongo.MongoReactiveAutoConfiguration
@@ -9,7 +8,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient
 import org.springframework.cloud.gateway.route.RouteLocator
 import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder
 import org.springframework.context.annotation.Bean
-import reactivefeign.webclient.WebReactiveFeign
+import org.springframework.web.reactive.function.client.WebClient
 
 @SpringBootApplication(exclude = [MongoReactiveAutoConfiguration::class, MongoReactiveDataAutoConfiguration::class])
 @EnableDiscoveryClient
@@ -22,8 +21,9 @@ class Gateway {
 	}
 
 	@Bean
-	fun accountServiceAPI() : AccountServiceAPI {
-		return WebReactiveFeign.builder<AccountServiceAPI>().target(AccountServiceAPI::class.java, "http://service-account:8070")
+	fun webClient() : WebClient {
+//		return WebClient.create("http://service-account:8070")
+		return WebClient.create("http://localhost:8070")
 	}
 }
 
