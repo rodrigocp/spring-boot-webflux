@@ -15,7 +15,5 @@ class AccountServiceAPI(private val client: WebClient) {
 			.accept(MediaType.APPLICATION_JSON)
 			.exchange()
 			.flatMap { it.bodyToMono(AccountDTO::class.java) }
-//			.retrieve()
-//			.bodyToMono(AccountDTO::class.java)
 	}
 }
