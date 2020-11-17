@@ -20,7 +20,7 @@ $ docker-compose up
 ```
 * Do a GET Request for User List:
 ```
-$ curl --request GET --url http://localhost:8080/api/users/ --header 'Authorization: Basic YWRtaW5pc3RyYXRvcjpyb290'
+$ curl --request GET --url http://localhost:8080/api/accounts/ --header 'Authorization: Basic YWRtaW5pc3RyYXRvcjpyb290'
 ```
 * Default User and Password:
 ```
