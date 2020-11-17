@@ -8,6 +8,7 @@ Simple Micro-Service Spring Boot project.
 ### Services:
 * **Gateway Service** for authentication and routing
 * **Account Service** for registered users (**MongoDB**)
+* **Kibana Service** for logging view and reports (**Gateway Service**)
 
 ### Build
 * Run Gradle Build:
@@ -27,3 +28,6 @@ $ curl --request GET --url http://localhost:8080/api/accounts/ --header 'Authori
 Username: administrator
 Password: root
 ```
+
+### Issues
+* No docker volumes creation yet!
