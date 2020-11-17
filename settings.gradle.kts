@@ -1,2 +1,2 @@
 rootProject.name = "services"
-include("commons", "eureka", "account", "gateway")
+include("eureka", "account", "gateway")

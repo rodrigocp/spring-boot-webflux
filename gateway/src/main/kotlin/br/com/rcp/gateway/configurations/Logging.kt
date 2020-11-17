@@ -1,6 +1,5 @@
 package br.com.rcp.gateway.configurations
 
-import com.fasterxml.jackson.databind.ObjectMapper
 import org.reactivestreams.Publisher
 import org.slf4j.LoggerFactory
 import org.springframework.context.annotation.Configuration
@@ -58,19 +57,15 @@ class Logging : WebFilter {
 
 		private fun trace(stream: ByteArrayOutputStream) {
 			val	status	= delegate.statusCode
-			val res		= String(stream.toByteArray())
+			val payload	= String(stream.toByteArray())
 			val elapsed	= System.currentTimeMillis() - start;
-			val	map		= mapOf("id" to identifier, "elapsed" to elapsed, "status" to status, "payload" to res, "audit" to true)
-			val	log		= ObjectMapper().writeValueAsString(map)
-			LoggerFactory.getLogger(Logging::class.java).info(log)
+			LoggerFactory.getLogger(Logging::class.java).info("response({} ms): identifier={}, uri={}, payload={}, audit={}", elapsed, identifier, status, payload, true)
 		}
 
 		private fun trace() {
 			val	status	= delegate.statusCode
 			val elapsed	= System.currentTimeMillis() - start;
-			val	map		= mapOf("id" to identifier, "elapsed" to elapsed, "status" to status, "audit" to true)
-			val	log		= ObjectMapper().writeValueAsString(map)
-			LoggerFactory.getLogger(Logging::class.java).info(log)
+			LoggerFactory.getLogger(Logging::class.java).info("response({} ms): identifier={}, uri={}, audit={}", elapsed, identifier, status, true)
 		}
 	}
 
@@ -99,19 +94,15 @@ class Logging : WebFilter {
 			val	method	= delegate.method
 			val	path	= delegate.path.toString()
 			val	headers	= delegate.headers
-			val req		= String(stream.toByteArray())
-			val	map		= mapOf("id" to identifier, "method" to method, "uri" to path, "headers" to headers, "payload" to req, "audit" to true)
-			val	log		= ObjectMapper().writeValueAsString(map)
-			LoggerFactory.getLogger(Logging::class.java).info(log)
+			val payload	= String(stream.toByteArray())
+			LoggerFactory.getLogger(Logging::class.java).info("request: identifier={}, method={}, uri={}, headers={}, payload={}, audit={}", identifier, method, path, headers, payload, true)
 		}
 
 		private fun trace() {
 			val	method	= delegate.method
 			val	path	= delegate.path.toString()
 			val	headers	= delegate.headers
-			val	map		= mapOf("id" to identifier, "method" to method, "uri" to path, "headers" to headers, "audit" to true)
-			val	log		= ObjectMapper().writeValueAsString(map)
-			LoggerFactory.getLogger(Logging::class.java).info(log)
+			LoggerFactory.getLogger(Logging::class.java).info("request: identifier={}, method={}, uri={}, headers={}, audit={}", identifier, method, path, headers, true)
 		}
 	}
 }

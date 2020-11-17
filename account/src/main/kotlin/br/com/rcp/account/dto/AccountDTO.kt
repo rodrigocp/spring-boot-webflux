@@ -1,6 +1,5 @@
-package br.com.rcp.gateway.dto.inner
+package br.com.rcp.account.dto
 
-import br.com.rcp.gateway.dto.base.DataTransfer
 import com.fasterxml.jackson.annotation.*
 import org.hibernate.validator.constraints.Length
 
@@ -9,30 +8,30 @@ import org.hibernate.validator.constraints.Length
 @JsonPropertyOrder(alphabetic = true)
 data class AccountDTO(
 	@JsonProperty("identifier")
-	override var identifier	: String,
+	var identifier	: String,
 
 	@JsonProperty("created_at")
-	override var createdAt	: String,
+	var createdAt	: String,
 
 	@JsonProperty("updated_at")
-	override var updatedAt	: String,
+	var updatedAt	: String,
 
 	@JsonProperty("username")
-	var username	: String,
+	var username	: String?,
 
 	@JsonProperty("name")
-	var	name		: String,
+	var	name		: String?,
 
 	@JsonProperty("email")
-	var	email		: String,
+	var	email		: String?,
 
-	@JsonProperty("password")
+	@JsonProperty("password", access = JsonProperty.Access.WRITE_ONLY)
 	@Length(min = 8)
-	var password	: String,
+	var password	: String?,
 
 	@JsonProperty("enabled")
 	var	enabled		: Boolean,
 
 	@JsonProperty("roles")
 	var	roles		: MutableList<String>
-) : DataTransfer
+)

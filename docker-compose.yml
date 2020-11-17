@@ -5,7 +5,7 @@ services:
         container_name: elasticsearch
         restart: unless-stopped
         image: docker.elastic.co/elasticsearch/elasticsearch:7.10.0
-        networks: [internal]
+        networks: [public, internal]
         ports: ['9200:9200', '9300:9300']
         volumes: [~/Documentos/Volumes/ELK:/usr/share/elasticsearch/data]
         environment:
@@ -32,7 +32,7 @@ services:
         restart: unless-stopped
         image: docker.elastic.co/logstash/logstash:7.10.0
         depends_on: [elasticsearch]
-        networks: [internal]
+        networks: [public, internal]
         ports: ['5000:5000']
         volumes: [./logstash/:/usr/share/logstash/pipeline/]
         environment:
@@ -43,14 +43,14 @@ services:
         restart: unless-stopped
         image: redis
         command: redis-server --requirepass "postgres"
-        networks: [internal]
+        networks: [public, internal]
         ports: ['6379:6379']
 
     mongo:
         container_name: mongo
         restart: unless-stopped
         image: mongo
-        networks: [internal]
+        networks: [public, internal]
         ports: ['27017:27017']
         environment:
             MONGO_INITDB_ROOT_USERNAME: postgres
@@ -61,7 +61,7 @@ services:
         container_name: eureka-service
         restart: unless-stopped
         build: ./eureka
-        networks: [internal]
+        networks: [public, internal]
         ports: ['8761:8761']
 
     account:
@@ -70,7 +70,7 @@ services:
         build: ./account
         depends_on: [mongo, eureka]
         ports: ['8070:8070']
-        networks: [internal]
+        networks: [public, internal]
         environment:
             spring.data.mongodb.host: mongo
             eureka.client.service-url.defaultZone: http://eureka:8761/eureka/
@@ -79,7 +79,7 @@ services:
         container_name: gateway-service
         restart: unless-stopped
         build: ./gateway
-        depends_on: [account]
+        depends_on: [account, logstash]
         ports: ['8080:8080']
         networks: [public, internal]
         environment:
