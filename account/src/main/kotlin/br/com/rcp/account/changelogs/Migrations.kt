@@ -29,7 +29,7 @@ class Migrations {
 				updatedAt	= LocalDateTime.now(),
 				createdBy	= "system",
 				modifiedBy	= "system",
-				roles		= arrayListOf()
+				roles		= arrayListOf("root")
 			)
 		)
 	}

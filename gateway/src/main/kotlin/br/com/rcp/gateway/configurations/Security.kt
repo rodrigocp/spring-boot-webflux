@@ -11,7 +11,7 @@ import org.springframework.security.config.web.server.ServerHttpSecurity
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.userdetails.*
 import org.springframework.security.web.server.SecurityWebFilterChain
-import org.springframework.security.web.server.context.NoOpServerSecurityContextRepository
+import org.springframework.security.web.server.context.NoOpServerSecurityContextRepository.getInstance
 import org.springframework.stereotype.Component
 import reactor.core.publisher.Mono
 
@@ -26,10 +26,10 @@ class Security {
 			.csrf().disable()
 			.formLogin().disable()
 			.logout().disable()
-			.httpBasic()
-			.and().authorizeExchange()
-			.anyExchange().authenticated()
-			.and().securityContextRepository(NoOpServerSecurityContextRepository.getInstance())
+			.httpBasic().securityContextRepository(getInstance())
+			.and()
+			.authorizeExchange().anyExchange().authenticated()
+			.and()
 			.build()
 	}
 
@@ -38,7 +38,7 @@ class Security {
 		override fun findByUsername(username: String?): Mono<UserDetails> {
 			return mono {
 				service.find(username ?: "").awaitFirstOrNull()?.let {
-					User(it.username, it.password, it.roles.map {role -> SimpleGrantedAuthority(role) })
+					User(it.identifier, it.password, it.roles.map {role -> SimpleGrantedAuthority(role)})
 				}
 			}
 		}

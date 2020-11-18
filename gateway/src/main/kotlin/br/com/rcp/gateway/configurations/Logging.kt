@@ -2,9 +2,9 @@ package br.com.rcp.gateway.configurations
 
 import org.reactivestreams.Publisher
 import org.slf4j.LoggerFactory
-import org.springframework.context.annotation.Configuration
 import org.springframework.core.io.buffer.DataBuffer
 import org.springframework.http.server.reactive.*
+import org.springframework.stereotype.Component
 import org.springframework.web.server.*
 import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
@@ -12,14 +12,13 @@ import java.io.ByteArrayOutputStream
 import java.nio.channels.Channels
 import java.util.*
 
-@Configuration
-class Logging : WebFilter {
+@Component
+class Logging: WebFilter {
 	override fun filter(exchange: ServerWebExchange, chain: WebFilterChain): Mono<Void> {
 		val	start		= System.currentTimeMillis()
 		val	identifier	= UUID.randomUUID()
 		return chain.filter(ExchangeDecorator(identifier, exchange, start))
 	}
-
 	private class ExchangeDecorator(private val identifier: UUID, exchange: ServerWebExchange, private val start: Long) : ServerWebExchangeDecorator(exchange) {
 		override fun getRequest(): ServerHttpRequest {
 			return RequestLoggingInterceptor(identifier, super.getRequest())
