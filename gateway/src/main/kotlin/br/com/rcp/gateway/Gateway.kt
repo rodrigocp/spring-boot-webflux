@@ -15,13 +15,15 @@ import org.springframework.web.reactive.function.client.WebClient
 class Gateway {
 	@Bean
 	fun locator(builder: RouteLocatorBuilder): RouteLocator {
-		return builder.routes().route("account-service") { it.path("/api/accounts/**").filters { filter -> filter.rewritePath("^/api", "") }.uri("lb://account-service") }.build()
+		return builder.routes()
+			.route("account-service")	{ it.path("/api/accounts/**").filters	{ filter -> filter.rewritePath("^/api", "") }.uri("lb://account-service") }
+			.route("vehicle-service")	{ it.path("/api/vehicles/**").filters 	{ filter -> filter.rewritePath("^/api", "") }.uri("lb://vehicles-service") }
+			.build()
 	}
 
 	@Bean
 	fun accountWebClient() : WebClient {
-//		return WebClient.create("http://account-service:8070")
-		return WebClient.create("http://localhost:8070")
+		return WebClient.create("http://account-service:8070")
 	}
 }
 

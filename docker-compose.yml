@@ -57,6 +57,16 @@ services:
             MONGO_INITDB_ROOT_PASSWORD: postgres
             MONGO_INITDB_DATABASE: authentication
 
+    postgres:
+        container_name: postgres
+        restart: unless-stopped
+        image: postgres
+        networks: [public, internal]
+        ports: ['5430:5432']
+        environment:
+            POSTGRES_USERNAME: postgres
+            POSTGRES_PASSWORD: postgres
+
     eureka:
         container_name: eureka-service
         restart: unless-stopped
