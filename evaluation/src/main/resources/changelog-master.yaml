@@ -1,4 +1,6 @@
 databaseChangeLog:
     - includeAll:
         path: migrations/*.sql
+        dbms: postgresql
+        encoding: utf8
         relativeToChangelogFile: true

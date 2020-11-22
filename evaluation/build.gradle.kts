@@ -2,7 +2,7 @@ plugins {
 	kotlin("jvm")
 	kotlin("plugin.spring")
 	id("org.springframework.boot")
-	id("org.liquibase.gradle") version "2.0.4"
+	id("org.liquibase.gradle") version "2.0.3"
 }
 
 dependencies {
@@ -11,7 +11,7 @@ dependencies {
 	implementation("io.r2dbc:r2dbc-postgresql")
 	implementation("org.postgresql:postgresql")
 	implementation("joda-time:joda-time:2.10.6")
-	implementation("org.liquibase:liquibase-core:4.2.0")
+	implementation("org.liquibase:liquibase-core:3.10.2")
 	implementation("org.springframework.data:spring-data-r2dbc")
 	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
 	implementation("org.springframework.boot:spring-boot-starter-jdbc")
