@@ -7,8 +7,8 @@ import org.springframework.data.relational.core.mapping.Table
 import java.time.LocalDateTime
 import java.util.*
 
-@Table("vehicle")
-data class Vehicle (
+@Table("group")
+data class Group (
 	@Id
 	var	identifier		: Long,
 
@@ -21,18 +21,9 @@ data class Vehicle (
 	@Column("account")
 	var	createdBy		: UUID,
 
-	@Column("status")
-	var	status			: String,
+	@Column("name")
+	var	name			: String,
 
-	@Column("plate")
-	var	plate			: String,
-
-	@Column("vin")
-	var	vin				: String,
-
-	@Column("mileage")
-	var	mileage			: Int,
-
-	@Column("year")
-	var	year			: Int
+	@Column("ein")
+	var	ein				: String
 )

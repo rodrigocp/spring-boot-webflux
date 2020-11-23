@@ -6,6 +6,7 @@ create table if not exists "group" (
     identifier bigserial    not null,
     version    bigserial    not null,
     account    uuid         not null,
+    created    timestamp    not null default now(),
     name       varchar(60)  not null,
     ein        varchar(14)  not null,
     constraint pkey_group primary key (identifier)
