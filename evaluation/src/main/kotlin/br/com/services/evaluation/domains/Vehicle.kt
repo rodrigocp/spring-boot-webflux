@@ -1,5 +1,6 @@
 package br.com.services.evaluation.domains
 
+import br.com.services.evaluation.domains.base.Domain
 import org.springframework.data.annotation.Id
 import org.springframework.data.annotation.Version
 import org.springframework.data.relational.core.mapping.Column
@@ -35,4 +36,4 @@ data class Vehicle (
 
 	@Column("year")
 	var	year			: Int
-)
+) : Domain

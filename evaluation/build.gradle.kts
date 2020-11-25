@@ -25,6 +25,10 @@ dependencies {
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
+tasks.test {
+	useJUnitPlatform()
+}
+
 dependencyManagement {
 	imports {
 		mavenBom("org.springframework.cloud:spring-cloud-dependencies:Hoxton.SR8")
