@@ -29,6 +29,10 @@ tasks.test {
 	useJUnitPlatform()
 }
 
+tasks.withType<Test> {
+	useJUnitPlatform()
+}
+
 dependencyManagement {
 	imports {
 		mavenBom("org.springframework.cloud:spring-cloud-dependencies:Hoxton.SR8")
