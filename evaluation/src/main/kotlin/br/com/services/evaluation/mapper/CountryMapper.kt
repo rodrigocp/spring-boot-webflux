@@ -6,10 +6,13 @@ import br.com.services.evaluation.mapper.base.Mapper
 
 object CountryMapper : Mapper<Country, CountryDTO> {
 	override fun convert(value: Country): CountryDTO {
-		TODO("Not yet implemented")
+		return CountryDTO.apply {
+			identifier	= value.identifier
+			name		= value.name
+		}
 	}
 
 	override fun convert(value: CountryDTO): Country {
-		TODO("Not yet implemented")
+		return Country(null, null, null, null, value.name)
 	}
 }

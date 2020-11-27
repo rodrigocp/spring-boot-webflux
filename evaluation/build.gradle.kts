@@ -11,7 +11,7 @@ dependencies {
 	implementation("io.r2dbc:r2dbc-postgresql")
 	implementation("org.postgresql:postgresql")
 	implementation("joda-time:joda-time:2.10.6")
-	implementation("org.liquibase:liquibase-core:3.10.2")
+	implementation("org.liquibase:liquibase-core")
 	implementation("org.springframework.data:spring-data-r2dbc")
 	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
 	implementation("org.springframework.boot:spring-boot-starter-jdbc")
@@ -19,9 +19,9 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-webflux")
 	implementation("org.springframework.boot:spring-boot-starter-actuator")
 	implementation("org.springframework.cloud:spring-cloud-starter-config")
-	implementation("org.springframework.cloud:spring-cloud-starter-netflix-hystrix")
+//	implementation("org.springframework.cloud:spring-cloud-starter-netflix-hystrix")
 	implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
-	implementation("org.springframework.cloud:spring-cloud-starter-netflix-hystrix-dashboard")
+//	implementation("org.springframework.cloud:spring-cloud-starter-netflix-hystrix-dashboard")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
@@ -35,6 +35,6 @@ tasks.withType<Test> {
 
 dependencyManagement {
 	imports {
-		mavenBom("org.springframework.cloud:spring-cloud-dependencies:Hoxton.SR8")
+		mavenBom("org.springframework.cloud:spring-cloud-dependencies:Hoxton.SR9")
 	}
 }

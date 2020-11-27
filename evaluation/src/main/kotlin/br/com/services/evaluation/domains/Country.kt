@@ -7,9 +7,9 @@ import java.time.LocalDateTime
 import java.util.*
 
 data class Country(
-	@Id			 var	identifier	: Long,
-	@Version	 var	version		: Long,
-	@CreatedBy	 var	account		: UUID,
-	@CreatedDate var	created		: LocalDateTime,
-	@Column		 var	name		: String
+	@Id			 var	identifier	: Long?,
+	@Version	 var	version		: Long?,
+	@CreatedBy	 var	account		: UUID?,
+	@CreatedDate var	created		: LocalDateTime?,
+	@Column		 var	name		: String?
 ) : Domain
