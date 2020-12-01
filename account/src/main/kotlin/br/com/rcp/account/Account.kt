@@ -8,7 +8,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient
-import org.springframework.cloud.netflix.hystrix.EnableHystrix
 import org.springframework.context.annotation.Bean
 import org.springframework.data.mongodb.config.EnableMongoAuditing
 import org.springframework.http.MediaType
@@ -23,7 +22,6 @@ import org.springframework.web.reactive.function.server.*
 @EnableCircuitBreaker
 @EnableMongoAuditing
 @EnableWebFlux
-@EnableHystrix
 class Authentication {
 	@Bean
 	fun accountRouter(@Autowired handler: AccountHandler): RouterFunction<ServerResponse> {

@@ -14,7 +14,7 @@ abstract class AbstractService<T : Domain, DTO : DataTransfer>(protected val rep
 		return repository.find(identifier)?.let(mapper::convert)
 	}
 
-	override suspend fun delete(identifier: Long): Int {
+	override suspend fun remove(identifier: Long): Int {
 		return repository.delete(identifier)
 	}
 }

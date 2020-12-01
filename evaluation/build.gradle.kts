@@ -1,8 +1,19 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
-	kotlin("jvm")
-	kotlin("plugin.spring")
-	id("org.springframework.boot")
-	id("org.liquibase.gradle") version "2.0.3"
+	kotlin("jvm")							version "1.4.10"
+	kotlin("plugin.spring")					version "1.4.10"
+	id("org.springframework.boot")			version "2.4.0"
+	id("io.spring.dependency-management")	version "1.0.10.RELEASE"
+}
+
+group	= "br.com.rcp"
+version	= "1.0.0"
+
+repositories {
+	mavenCentral()
+	jcenter()
+	maven { url = uri("https://repo.spring.io/milestone") }
 }
 
 dependencies {
@@ -10,19 +21,36 @@ dependencies {
 	implementation(kotlin("reflect"))
 	implementation("io.r2dbc:r2dbc-postgresql")
 	implementation("org.postgresql:postgresql")
-	implementation("joda-time:joda-time:2.10.6")
 	implementation("org.liquibase:liquibase-core")
 	implementation("org.springframework.data:spring-data-r2dbc")
 	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
 	implementation("org.springframework.boot:spring-boot-starter-jdbc")
-	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.springframework.boot:spring-boot-starter-webflux")
 	implementation("org.springframework.boot:spring-boot-starter-actuator")
-	implementation("org.springframework.cloud:spring-cloud-starter-config")
-//	implementation("org.springframework.cloud:spring-cloud-starter-netflix-hystrix")
 	implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
-//	implementation("org.springframework.cloud:spring-cloud-starter-netflix-hystrix-dashboard")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
+	testImplementation("io.projectreactor:reactor-test")
+}
+
+dependencyManagement {
+	imports {
+		mavenBom("org.springframework.cloud:spring-cloud-dependencies:Hoxton.SR9")
+		mavenBom("org.springframework.cloud:spring-cloud-dependencies:2020.0.0-M5")
+	}
+}
+
+tasks.withType<KotlinCompile> {
+	kotlinOptions {
+		jvmTarget = "11"
+	}
+}
+
+tasks.withType<KotlinCompile> {
+	kotlinOptions {
+		sourceCompatibility	= "11"
+		targetCompatibility	= "11"
+		jvmTarget			= "11"
+	}
 }
 
 tasks.test {
@@ -31,10 +59,4 @@ tasks.test {
 
 tasks.withType<Test> {
 	useJUnitPlatform()
-}
-
-dependencyManagement {
-	imports {
-		mavenBom("org.springframework.cloud:spring-cloud-dependencies:Hoxton.SR9")
-	}
 }

@@ -10,14 +10,18 @@ import org.springframework.stereotype.Service
 
 @Service
 class CountryService(repository: CountryRepository) : AbstractService<Country, CountryDTO>(repository, CountryMapper) {
+	suspend fun find2(): List<Country> {
+		return repository.find()
+	}
+
 	override suspend fun insert(data: CountryDTO): CountryDTO? {
 		return repository.insert(data.let(::convert))?.let(::convert)
 	}
 
-	override suspend fun update(identifier: Long, data: CountryDTO): Int {
+	override suspend fun update(identifier: Long, data: CountryDTO): CountryDTO? {
 		val	entity	= repository.find(identifier) ?: throw RuntimeException("Entity not found!")
 		val	model	= data.let(::convert)
 		entity.copy(model)
-		return repository.update(entity)
+		return repository.update(entity)?.let(::convert)
 	}
 }

@@ -6,7 +6,7 @@ import br.com.services.evaluation.mapper.base.Mapper
 
 object CountryMapper : Mapper<Country, CountryDTO> {
 	override fun convert(value: Country): CountryDTO {
-		return CountryDTO.apply {
+		return CountryDTO().apply {
 			identifier	= value.identifier
 			name		= value.name
 		}

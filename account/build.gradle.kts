@@ -1,7 +1,19 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
-	kotlin("jvm")
-	kotlin("plugin.spring")
-	id("org.springframework.boot")
+	kotlin("jvm")							version "1.4.10"
+	kotlin("plugin.spring")					version "1.4.10"
+	id("org.springframework.boot")			version "2.4.0"
+	id("io.spring.dependency-management")	version "1.0.10.RELEASE"
+}
+
+group	= "br.com.rcp"
+version	= "1.0.0"
+
+repositories {
+	mavenCentral()
+	jcenter()
+	maven { url = uri("https://repo.spring.io/milestone") }
 }
 
 dependencies {
@@ -15,11 +27,9 @@ dependencies {
 	implementation("org.springframework.cloud:spring-cloud-starter-config")
 	implementation("com.github.cloudyrock.mongock:mongock-spring-v5:4.1.15")
 	implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
-	implementation("org.springframework.cloud:spring-cloud-starter-netflix-hystrix")
 	implementation("com.github.cloudyrock.mongock:mongodb-springdata-v3-driver:4.1.15")
 	implementation("org.springframework.boot:spring-boot-starter-data-mongodb-reactive")
 	implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
-//	implementation("org.springframework.cloud:spring-cloud-starter-netflix-hystrix-dashboard")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
@@ -27,4 +37,20 @@ dependencyManagement {
 	imports {
 		mavenBom("org.springframework.cloud:spring-cloud-dependencies:Hoxton.SR8")
 	}
+}
+
+tasks.withType<KotlinCompile> {
+	kotlinOptions {
+		sourceCompatibility	= "11"
+		targetCompatibility	= "11"
+		jvmTarget			= "11"
+	}
+}
+
+tasks.test {
+	useJUnitPlatform()
+}
+
+tasks.withType<Test> {
+	useJUnitPlatform()
 }

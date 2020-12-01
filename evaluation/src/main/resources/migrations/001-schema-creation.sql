@@ -8,7 +8,7 @@ create table if not exists country
     version    bigserial    not null,
     account    uuid         not null,
     created    timestamp    not null default now(),
-    name       char(100)    not null,
+    name       varchar(100) not null,
     constraint pkey_country primary key (identifier)
 );
 
@@ -18,7 +18,7 @@ create table if not exists province
     version    bigserial        not null,
     account    uuid             not null,
     created    timestamp        not null default now(),
-    name       char(100)        not null,
+    name       varchar(100)     not null,
     country_id bigserial        not null,
     constraint pkey_province    primary key (identifier),
     constraint fk_group         foreign key (country_id) references country(identifier)
@@ -30,7 +30,7 @@ create table if not exists subregion
     version     bigserial       not null,
     account     uuid            not null,
     created     timestamp       not null default now(),
-    name        char(100)       not null,
+    name       varchar(100)     not null,
     country_id  bigserial       not null,
     province_id bigserial       not null,
     constraint pkey_subregion   primary key (identifier),

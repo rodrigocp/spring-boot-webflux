@@ -7,6 +7,6 @@ interface Service<T:Domain, DTO: DataTransfer> {
 	suspend fun find()					 			 : List<DTO>
 	suspend fun find(identifier: Long)	 			 : DTO?
 	suspend fun insert(data: DTO)		 			 : DTO?
-	suspend fun update(identifier: Long, data: DTO) : Int
-	suspend fun delete(identifier: Long) 			 : Int
+	suspend fun update(identifier: Long, data: DTO)  : DTO?
+	suspend fun remove(identifier: Long) 			 : Int
 }

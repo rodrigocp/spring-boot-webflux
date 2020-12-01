@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.annotation.JsonProperty.Access.READ_ONLY
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-object CountryDTO : DataTransfer {
+class CountryDTO : DataTransfer {
 	@JsonProperty(access = READ_ONLY)
 	var	identifier	: Long?		= null
 

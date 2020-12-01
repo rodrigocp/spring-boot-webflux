@@ -1,7 +1,19 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
-	kotlin("jvm")
-	kotlin("plugin.spring")
-	id("org.springframework.boot")
+	kotlin("jvm")							version "1.4.10"
+	kotlin("plugin.spring")					version "1.4.10"
+	id("org.springframework.boot")			version "2.4.0"
+	id("io.spring.dependency-management")	version "1.0.10.RELEASE"
+}
+
+group						= "br.com.rcp"
+version						= "1.0.0"
+java.sourceCompatibility	= JavaVersion.VERSION_11
+
+repositories {
+	mavenCentral()
+	jcenter()
 }
 
 dependencies {
@@ -15,11 +27,28 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-security")
 	implementation("org.springframework.cloud:spring-cloud-starter-gateway")
 	implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
+	implementation("org.springframework.cloud:spring-cloud-starter-circuitbreaker-reactor-resilience4j")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
 dependencyManagement {
 	imports {
-		mavenBom("org.springframework.cloud:spring-cloud-dependencies:Hoxton.SR8")
+		mavenBom("org.springframework.cloud:spring-cloud-dependencies:Hoxton.SR9")
 	}
+}
+
+tasks.withType<KotlinCompile> {
+	kotlinOptions {
+		sourceCompatibility	= "11"
+		targetCompatibility	= "11"
+		jvmTarget			= "11"
+	}
+}
+
+tasks.test {
+	useJUnitPlatform()
+}
+
+tasks.withType<Test> {
+	useJUnitPlatform()
 }

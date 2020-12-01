@@ -85,6 +85,16 @@ services:
             spring.data.mongodb.host: mongo
             eureka.client.service-url.defaultZone: http://eureka:8761/eureka/
 
+    evaluation:
+        container_name: evaluation-service
+        restart: unless-stopped
+        build: ./evaluation
+        depends_on: [postgres, eureka]
+        ports: ['8010:8010']
+        networks: [public, internal]
+        environment:
+            eureka.client.service-url.defaultZone: http://eureka:8761/eureka/
+
     gateway:
         container_name: gateway-service
         restart: unless-stopped
