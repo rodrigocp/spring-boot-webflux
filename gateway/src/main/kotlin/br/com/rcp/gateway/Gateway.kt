@@ -24,11 +24,14 @@ class Gateway {
 
 	@Bean
 	@LoadBalanced
-	fun accountWebClient() : WebClient {
-		return WebClient.create("http://account-service")
+	fun webClientBuilder() : WebClient.Builder {
+		return WebClient.builder()
 	}
 
-	// TODO: Enable Circuit Breaker
+	@Bean
+	fun accountWebClient(builder: WebClient.Builder) : WebClient {
+		return builder.baseUrl("http://account-service").build()
+	}
 }
 
 fun main(args: Array<String>) {

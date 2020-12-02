@@ -36,6 +36,7 @@ dependencies {
 dependencyManagement {
 	imports {
 		mavenBom("org.springframework.cloud:spring-cloud-dependencies:Hoxton.SR8")
+		mavenBom("org.springframework.cloud:spring-cloud-dependencies:2020.0.0-M5")
 	}
 }
 

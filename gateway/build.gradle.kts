@@ -14,6 +14,7 @@ java.sourceCompatibility	= JavaVersion.VERSION_11
 repositories {
 	mavenCentral()
 	jcenter()
+	maven { url = uri("https://repo.spring.io/milestone") }
 }
 
 dependencies {
@@ -27,13 +28,14 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-security")
 	implementation("org.springframework.cloud:spring-cloud-starter-gateway")
 	implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
-	implementation("org.springframework.cloud:spring-cloud-starter-circuitbreaker-reactor-resilience4j")
+	implementation("io.github.resilience4j:resilience4j-reactor")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
 dependencyManagement {
 	imports {
 		mavenBom("org.springframework.cloud:spring-cloud-dependencies:Hoxton.SR9")
+		mavenBom("org.springframework.cloud:spring-cloud-dependencies:2020.0.0-M5")
 	}
 }
 
