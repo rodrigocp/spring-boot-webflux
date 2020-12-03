@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    service: gateway-service
+  name: gateway-service
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      service: gateway-service
+  template:
+    metadata:
+      labels:
+        service: gateway-service
+    spec:
+      containers:
+        - name: gateway-service
+          imagePullPolicy: Never
+          image: gateway-service
+          ports:
+            - containerPort: 8080
+      restartPolicy: Always

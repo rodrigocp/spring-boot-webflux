@@ -1,7 +1,6 @@
 package br.com.rcp.account.dto
 
 import com.fasterxml.jackson.annotation.*
-import org.hibernate.validator.constraints.Length
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -26,7 +25,6 @@ data class AccountDTO(
 	var	email		: String?,
 
 	@JsonProperty("password", access = JsonProperty.Access.WRITE_ONLY)
-	@Length(min = 8)
 	var password	: String?,
 
 	@JsonProperty("enabled")

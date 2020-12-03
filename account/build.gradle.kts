@@ -29,14 +29,12 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
 	implementation("com.github.cloudyrock.mongock:mongodb-springdata-v3-driver:4.1.15")
 	implementation("org.springframework.boot:spring-boot-starter-data-mongodb-reactive")
-	implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
 dependencyManagement {
 	imports {
 		mavenBom("org.springframework.cloud:spring-cloud-dependencies:Hoxton.SR8")
-		mavenBom("org.springframework.cloud:spring-cloud-dependencies:2020.0.0-M5")
 	}
 }
 

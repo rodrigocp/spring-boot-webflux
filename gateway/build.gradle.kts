@@ -27,7 +27,6 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-actuator")
 	implementation("org.springframework.boot:spring-boot-starter-security")
 	implementation("org.springframework.cloud:spring-cloud-starter-gateway")
-	implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
 	implementation("io.github.resilience4j:resilience4j-reactor")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
@@ -35,7 +34,6 @@ dependencies {
 dependencyManagement {
 	imports {
 		mavenBom("org.springframework.cloud:spring-cloud-dependencies:Hoxton.SR9")
-		mavenBom("org.springframework.cloud:spring-cloud-dependencies:2020.0.0-M5")
 	}
 }
 

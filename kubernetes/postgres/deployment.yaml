@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    service: postgres-service
+  name: postgres
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      service: postgres-service
+  strategy: {}
+  template:
+    metadata:
+      labels:
+#        network/internal: "true"
+#        network/public: "true"
+        service: postgres-service
+    spec:
+      containers:
+        - env:
+            - name: POSTGRES_PASSWORD
+              value: postgres
+            - name: POSTGRES_USERNAME
+              value: postgres
+          image: postgres
+          name: postgres-service
+          ports:
+            - containerPort: 5432
+          resources: {}
+      restartPolicy: Always
+      volumes:
+        - name: postgres-data
+          persistentVolumeClaim:
+            claimName: postgres-data

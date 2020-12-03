@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    service: account-service
+  name: account-service
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      service: account-service
+  strategy: {}
+  template:
+    metadata:
+      labels:
+#        network/internal: "true"
+#        network/public: "true"
+        service: account-service
+    spec:
+      containers:
+        - env:
+            - name: spring.data.mongodb.host
+              value: mongo-service
+          image: account-service
+          name: account-service
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8070
+          resources: {}
+      restartPolicy: Always

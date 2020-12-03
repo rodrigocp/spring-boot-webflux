@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    service: account-service
+  name: account-service
+spec:
+  ports:
+      - port: 8070
+        targetPort: 8080
+  selector:
+    service: account-service
