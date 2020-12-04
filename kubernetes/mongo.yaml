@@ -1,22 +1,50 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    service: mongo
+  name: mongo
+spec:
+  ports:
+      - port: 27017
+        targetPort: 27017
+  selector:
+    service: mongo
+
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  labels:
+    service: mongo-data
+  name: mongo-data
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 100Mi
+
+---
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    service: mongo-service
-  name: mongo-service
+    service: mongo
+  name: mongo
 spec:
   replicas: 1
   selector:
     matchLabels:
-      service: mongo-service
+      service: mongo
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-#        network/internal: "true"
-#        network/public: "true"
-        service: mongo-service
+        service: mongo
     spec:
       containers:
         - env:
@@ -27,7 +55,7 @@ spec:
             - name: MONGO_INITDB_ROOT_USERNAME
               value: postgres
           image: mongo
-          name: mongo-service
+          name: mongo
           ports:
             - containerPort: 27017
           resources: {}

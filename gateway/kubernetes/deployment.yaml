@@ -5,7 +5,7 @@ metadata:
     service: gateway-service
   name: gateway-service
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       service: gateway-service
@@ -20,4 +20,5 @@ spec:
           image: gateway-service
           ports:
             - containerPort: 8080
+              protocol: TCP
       restartPolicy: Always

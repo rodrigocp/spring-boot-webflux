@@ -1,21 +1,50 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    service: postgres
+  name: postgres
+spec:
+  ports:
+    - name: "5430"
+      port: 5430
+      targetPort: 5432
+  selector:
+    service: postgres
+
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  labels:
+    service: postgres-data
+  name: postgres-data
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 100Mi
+
+
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    service: postgres-service
+    service: postgres
   name: postgres
 spec:
   replicas: 1
   selector:
     matchLabels:
-      service: postgres-service
+      service: postgres
   strategy: {}
   template:
     metadata:
       labels:
-#        network/internal: "true"
-#        network/public: "true"
-        service: postgres-service
+        service: postgres
     spec:
       containers:
         - env:
@@ -24,7 +53,7 @@ spec:
             - name: POSTGRES_USERNAME
               value: postgres
           image: postgres
-          name: postgres-service
+          name: postgres
           ports:
             - containerPort: 5432
           resources: {}

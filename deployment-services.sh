@@ -9,7 +9,7 @@ eval "$(minikube docker-env)"
 ### Build docker images
 echo "Building docker images..."
 docker build -t account-service ./account
-docker build -t account-service ./gateway
+docker build -t gateway-service ./gateway
 
 ### Recreate secret and mongo pods
 echo "Deleting pods..."

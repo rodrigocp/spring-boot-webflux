@@ -6,7 +6,8 @@ metadata:
   name: account-service
 spec:
   ports:
-      - port: 8070
-        targetPort: 8080
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
   selector:
     service: account-service
