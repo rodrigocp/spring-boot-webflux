@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: logstash
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      service: logstash
+  template:
+    metadata:
+      labels:
+        service: logstash
+    spec:
+      hostname: logstash
+      containers:
+        - name: logstash
+          image: docker.elastic.co/logstash/logstash:7.10.0
+          env:
+            - name: xpack.monitoring.elasticsearch.hosts
+              value: http://elasticsearch:9200
+          ports:
+            - containerPort: 5000
+          volumeMounts:
+            - name: logstash-pipeline
+              mountPath: "/usr/share/logstash/pipeline"
+      volumes:
+        - name: logstash-pipeline
+          configMap:
+            name: logstash-configmap
+            items:
+              - key: logstash.conf
+                path: logstash.conf

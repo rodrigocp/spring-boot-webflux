@@ -30,7 +30,7 @@ class Gateway {
 
 	@Bean
 	fun accountWebClient(builder: WebClient.Builder) : WebClient {
-		return builder.baseUrl("http://account-service").build()
+		return builder.baseUrl("http://account-service:8080").build()
 	}
 }
 

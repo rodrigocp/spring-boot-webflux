@@ -1,31 +1,23 @@
-apiVersion: v1
-kind: Service
-metadata:
-  name: kibana
-spec:
-  ports:
-    - port: 5601
-      targetPort: 5601
-  selector:
-    service: kibana
-
----
-
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: kibana
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       service: kibana
   template:
+    metadata:
+      labels:
+        service: kibana
     spec:
       containers:
-        - env:
+        - name: kibana
+          image: docker.elastic.co/kibana/kibana:7.10.0
+          env:
             - name: ELASTICSEARCH_HOSTS
-              value: http://elasticsearch:9200
+              value: "http://elasticsearch:9200"
             - name: PACK_GRAPH_ENABLED
               value: "true"
             - name: XPACK_ML_ENABLED
@@ -34,10 +26,12 @@ spec:
               value: "true"
             - name: XPACK_MONITORING_UI_CONTAINER_ELASTICSEARCH_ENABLED
               value: "true"
-            - name: XPACK_WATCHER_ENABLED
-              value: "true"
-          image: docker.elastic.co/kibana/kibana:7.10.0
-          name: kibana
           ports:
             - containerPort: 5601
-      restartPolicy: Always
+          volumeMounts:
+            - name: kibana-storage
+              mountPath: "/usr/share/kibana/data"
+      volumes:
+        - name: kibana-storage
+          persistentVolumeClaim:
+            claimName: persistent-volume-claim

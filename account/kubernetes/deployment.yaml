@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: account-service
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       service: account-service
@@ -20,5 +20,5 @@ spec:
             - containerPort: 8080
               protocol: TCP
           env:
-            -   name: spring.data.mongodb.host
-                value: mongo-service
+            - name: spring.data.mongodb.host
+              value: mongo
