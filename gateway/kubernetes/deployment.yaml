@@ -5,7 +5,7 @@ metadata:
     service: gateway-service
   name: gateway-service
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       service: gateway-service

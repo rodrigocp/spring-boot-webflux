@@ -17,8 +17,8 @@ class Gateway {
 	@Bean
 	fun locator(builder: RouteLocatorBuilder): RouteLocator {
 		return builder.routes()
-			.route("account-service")	{ it.path("/api/accounts/**").filters	{filter -> filter.rewritePath("^/api", "") }.uri("lb://account-service") }
-			.route("vehicle-service")	{ it.path("/api/vehicles/**").filters 	{filter -> filter.rewritePath("^/api", "") }.uri("lb://vehicles-service") }
+			.route("account-service")	{ it.path("/api/accounts/**").filters	{filter -> filter.rewritePath("^/api", "") }.uri("http://account-service:8080") }
+			.route("vehicle-service")	{ it.path("/api/vehicles/**").filters 	{filter -> filter.rewritePath("^/api", "") }.uri("http://vehicles-service:8080") }
 			.build()
 	}
 
