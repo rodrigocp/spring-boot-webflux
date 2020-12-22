@@ -1,2 +1,2 @@
 rootProject.name = "services"
-include("account", "gateway", "evaluation")
+include("account", "gateway", "administrative")
