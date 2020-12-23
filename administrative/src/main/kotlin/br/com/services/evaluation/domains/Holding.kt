@@ -9,12 +9,12 @@ import java.util.*
 
 @Table("holding")
 data class Holding(
-	@Id			 			var	identifier	: Long?,
-	@CreatedBy	 			var	account		: UUID?,
-	@CreatedDate 			var	created		: LocalDateTime?,
-	@Column		 			var	name		: String?,
-	@Column					var	ftin		: String?,
-	@Column("country_id")	var	country		: Long?,	// company country
-	@Column("state_id")		var	state		: Long?,	// company state or province
-	@Column("city_id")		var	city		: Long?		// company city
+	@Id			 			var	identifier	: Long?				= null,
+	@CreatedBy	 			var	account		: UUID?				= null,
+	@CreatedDate 			var	created		: LocalDateTime?	= null,
+	@Column		 			var	name		: String?			= null,
+	@Column					var	ftin		: String?			= null,
+	@Column("country_id")	var	country		: Long?				= null,	// company country
+	@Column("state_id")		var	state		: Long?				= null,	// company state or province
+	@Column("city_id")		var	city		: Long?				= null	// company city
 ) : Domain

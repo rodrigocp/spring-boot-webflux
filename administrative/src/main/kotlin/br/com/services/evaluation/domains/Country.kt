@@ -9,8 +9,8 @@ import java.util.*
 
 @Table("country")
 data class Country(
-	@Id			 var	identifier	: Long?,
-	@CreatedBy	 var	account		: UUID?,
-	@CreatedDate var	created		: LocalDateTime?,
-	@Column		 var	name		: String?
+	@Id			 var	identifier	: Long?				= null,
+	@CreatedBy	 var	account		: UUID?				= null,
+	@CreatedDate var	created		: LocalDateTime?	= null,
+	@Column		 var	name		: String?			= null
 ) : Domain

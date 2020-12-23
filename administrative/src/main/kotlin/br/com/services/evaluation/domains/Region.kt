@@ -9,9 +9,9 @@ import java.util.*
 
 @Table("region")
 data class Region(
-	@Id			 			var	identifier	: Long?,
-	@CreatedBy	 			var	account		: UUID?,
-	@CreatedDate 			var	created		: LocalDateTime?,
-	@Column		 			var	name		: String?,
-	@Column("holding_id")	var	holding		: Long?
+	@Id			 			var	identifier	: Long?				= null,
+	@CreatedBy	 			var	account		: UUID?				= null,
+	@CreatedDate 			var	created		: LocalDateTime?	= null,
+	@Column		 			var	name		: String?			= null,
+	@Column("holding_id")	var	holding		: Long?				= null
 ) : Domain

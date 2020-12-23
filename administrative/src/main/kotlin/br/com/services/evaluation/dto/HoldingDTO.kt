@@ -6,14 +6,20 @@ import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.annotation.JsonProperty.Access.READ_ONLY
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-class CityDTO : DataTransfer {
+class HoldingDTO : DataTransfer {
 	@JsonProperty(access = READ_ONLY)
 	var	identifier	: Long?		= null
 
 	@JsonProperty
 	var	name		: String?	= null
 
+	@JsonProperty("cnpj")
+	var	ftin		: String?	= null
+
 	@JsonProperty
+	var	city		: Long?		= null
+
+	@JsonProperty(access = READ_ONLY)
 	var	state		: Long?		= null
 
 	@JsonProperty(access = READ_ONLY)

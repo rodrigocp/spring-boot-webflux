@@ -14,6 +14,6 @@ object StateMapper : Mapper<State, StateDTO> {
 	}
 
 	override fun convert(value: StateDTO): State {
-		return State(null, null, null, value.name, value.country)
+		return State(name = value.name, country = value.country)
 	}
 }

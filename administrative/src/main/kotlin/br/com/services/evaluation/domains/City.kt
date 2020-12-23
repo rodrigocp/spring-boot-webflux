@@ -9,10 +9,10 @@ import java.util.*
 
 @Table("city")
 data class City(
-	@Id			 			var	identifier	: Long?,
-	@CreatedBy	 			var	account		: UUID?,
-	@CreatedDate 			var	created		: LocalDateTime?,
-	@Column		 			var	name		: String?,
-	@Column("state_id")		var	state		: Long?,
-	@Column("country_id")	var	country		: Long?
+	@Id			 			var	identifier	: Long?				= null,
+	@CreatedBy	 			var	account		: UUID?				= null,
+	@CreatedDate 			var	created		: LocalDateTime?	= null,
+	@Column		 			var	name		: String?			= null,
+	@Column("state_id")		var	state		: Long?				= null,
+	@Column("country_id")	var	country		: Long?				= null
 ) : Domain

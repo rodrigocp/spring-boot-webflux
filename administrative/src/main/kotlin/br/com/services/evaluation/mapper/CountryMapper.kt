@@ -13,6 +13,6 @@ object CountryMapper : Mapper<Country, CountryDTO> {
 	}
 
 	override fun convert(value: CountryDTO): Country {
-		return Country(null, null, null, value.name)
+		return Country(name = value.name)
 	}
 }

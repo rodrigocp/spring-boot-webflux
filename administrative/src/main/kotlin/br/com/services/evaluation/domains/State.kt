@@ -9,9 +9,9 @@ import java.util.*
 
 @Table("state")
 data class State(
-	@Id			 			var	identifier	: Long?,
-	@CreatedBy	 			var	account		: UUID?,
-	@CreatedDate 			var	created		: LocalDateTime?,
-	@Column		 			var	name		: String?,
-	@Column("country_id")	var	country		: Long?
+	@Id			 			var	identifier	: Long?				= null,
+	@CreatedBy	 			var	account		: UUID?				= null,
+	@CreatedDate 			var	created		: LocalDateTime?	= null,
+	@Column		 			var	name		: String?			= null,
+	@Column("country_id")	var	country		: Long?				= null
 ) : Domain
