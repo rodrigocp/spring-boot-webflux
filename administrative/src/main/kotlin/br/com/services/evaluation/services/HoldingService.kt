@@ -27,7 +27,7 @@ class HoldingService(repository: HoldingRepository) : AbstractService<Holding, H
 	}
 
 	override suspend fun update(identifier: Long, data: HoldingDTO): HoldingDTO? {
-		val	entity	  = repository.find(identifier)			   ?: throw RuntimeException("Entity not found!")
+		val	entity	  = repository.find(identifier)				   ?: throw RuntimeException("Entity not found!")
 		val	city	  = cityRepository.find(data.city ?: 0)		   ?: throw RuntimeException("Entity not found!")
 		val	state	  = stateRepository.find(city.state ?: 0)	   ?: throw RuntimeException("Entity not found!")
 		val	country	  = countryRepository.find(state.country ?: 0) ?: throw RuntimeException("Entity not found!")
